@@ -3,14 +3,7 @@
 require_relative 'board'
 
 # Rook class
-class Rook
-  attr_accessor :loc, :children
-
-  def initialize(loc = [1, 1])
-    @loc = loc
-    @children = Board.available_squares(self)
-  end
-
+class Rook < Piece
   def moves
     moves_arr = []
     range = [*-7..7]
