@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Rook class
+# Piece super-class
 class Piece
   attr_accessor :loc, :children
 

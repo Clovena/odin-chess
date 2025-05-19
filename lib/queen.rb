@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Rook class
+# Queen class
 class Queen < Piece
   def moves
     moves_arr = []
