@@ -5,6 +5,11 @@ module Board
   SIZE = 8
   FILES = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
 
+  def self.to(piece, coords)
+    piece.loc = coords if available_squares(piece).include?(coords)
+    # puts Board.coords_to_algebraic(coords, piece) # Delete later
+  end
+
   def self.valid_square?(coords)
     return true if coords[0].between?(1, SIZE) && coords[1].between?(1, SIZE)
 
