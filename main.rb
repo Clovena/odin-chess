@@ -1,15 +1,6 @@
 # frozen_string_literal: false
 
-require_relative 'lib/board'
-require_relative 'lib/piece'
-require_relative 'lib/pawn'
-require_relative 'lib/knight'
-require_relative 'lib/bishop'
-require_relative 'lib/rook'
-require_relative 'lib/queen'
-require_relative 'lib/king'
-require_relative 'lib/move'
-require_relative 'lib/notation'
+require_relative 'lib/chess'
 
 # def test_piece(piece)
 #   name = "#{piece.player} #{piece.class}"
