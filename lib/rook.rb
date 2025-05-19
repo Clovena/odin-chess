@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'board'
-
 # Rook class
 class Rook < Piece
   def moves

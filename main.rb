@@ -22,8 +22,5 @@ def test_piece(piece, name)
   puts
 end
 
-test_queen = Queen.new([5, 5])
-test_piece(test_queen, 'queen')
-
-test_king = King.new([1, 7])
-test_piece(test_king, 'king')
+test_bishop = Bishop.new([5, 5])
+test_piece(test_bishop, 'bishop')
