@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'lib/piece'
 require_relative 'lib/knight'
 require_relative 'lib/rook'
 require_relative 'lib/board'
