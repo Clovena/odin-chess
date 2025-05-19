@@ -5,17 +5,6 @@ require_relative 'move'
 
 # Knight class
 class Knight
-  MOVEMENT = [
-    [2, 1],
-    [1, 2],
-    [-1, 2],
-    [-2, 1],
-    [-2, -1],
-    [-1, -2],
-    [1, -2],
-    [2, -1]
-  ].freeze
-
   attr_accessor :loc, :children
 
   def initialize(loc = [1, 1])
@@ -24,6 +13,15 @@ class Knight
   end
 
   def moves
-    MOVEMENT
+    [
+      [2, 1],
+      [1, 2],
+      [-1, 2],
+      [-2, 1],
+      [-2, -1],
+      [-1, -2],
+      [1, -2],
+      [2, -1]
+    ].freeze
   end
 end
