@@ -2,9 +2,10 @@
 
 # Piece super-class
 class Piece
-  attr_accessor :loc, :children
+  attr_accessor :player, :loc, :children
 
-  def initialize(loc = [1, 1])
+  def initialize(player, loc = [1, 1])
+    @player = player
     @loc = loc
     @children = Move.available_squares(self)
   end
