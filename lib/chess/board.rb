@@ -51,12 +51,13 @@ class Board
   def move_to(from, to)
     from_key = from.to_sym
     piece = @squares[from_key]
-    return if piece.nil? || available_squares(piece).include?(algebraic_to_coords(to))
+    return unless !piece.nil? ||
+                  Board.available_squares(piece)
+                       .include?(Board.algebraic_to_coords(to))
 
     @squares[from_key] = nil
     @squares[to.to_sym] = piece
-
-    piece.loc = coords if available_squares(piece).include?(coords)
+    piece.reset(to)
   end
 
   def self.available_squares(piece)

@@ -10,4 +10,9 @@ class Piece
     @loc = Board.algebraic_to_coords(loc)
     @children = Board.available_squares(self)
   end
+
+  def reset(loc)
+    @loc = Board.algebraic_to_coords(loc)
+    @children = Board.available_squares(self)
+  end
 end
