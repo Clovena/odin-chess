@@ -6,14 +6,16 @@ require_relative 'lib/rook'
 require_relative 'lib/board'
 require_relative 'lib/notation'
 
+def test_piece(piece)
+  puts "The knight is on #{piece.loc}."
+  puts "In chess notation, this is #{Notation.coords_to_algebraic(piece.loc, piece)}."
+  puts "The knight can move like: #{piece.moves}"
+  puts "The knight can move to: #{piece.children}"
+  puts
+end
+
 test_knight = Knight.new([3, 3])
-puts "The knight is on #{test_knight.loc}."
-puts "In chess notation, this is #{Notation.coords_to_algebraic(test_knight.loc, test_knight)}."
-puts "The knight can move like: #{test_knight.moves}"
-puts "The knight can move to: #{test_knight.children}"
+test_piece(test_knight)
 
 test_rook = Rook.new([4, 5])
-puts "The rook is on #{test_rook.loc}."
-puts "In chess notation, this is #{Notation.coords_to_algebraic(test_rook.loc, test_rook)}."
-puts "The rook can move like: #{test_rook.moves}"
-puts "The rook can move to: #{test_rook.children}"
+test_piece(test_rook)
