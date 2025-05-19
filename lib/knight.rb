@@ -5,8 +5,6 @@ require_relative 'move'
 
 # Knight class
 class Knight
-  include Move
-
   MOVEMENT = [
     [2, 1],
     [1, 2],
