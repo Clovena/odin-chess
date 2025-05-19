@@ -2,7 +2,7 @@
 
 # Methods to convert between coordinates and algebraic notation
 module Notation
-  include Board
+  include Move
 
   def self.piece_letter(piece_obj)
     return '' if piece_obj.nil?

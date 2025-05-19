@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Methods for all objects that live on the Board
-module Board
+module Move
   SIZE = 8
   FILES = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
 

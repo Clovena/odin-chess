@@ -6,6 +6,6 @@ class Piece
 
   def initialize(loc = [1, 1])
     @loc = loc
-    @children = Board.available_squares(self)
+    @children = Move.available_squares(self)
   end
 end
