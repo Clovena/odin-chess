@@ -48,16 +48,39 @@ class Board
     end
   end
 
-  def move_to(from, to)
-    from_key = from.to_sym
-    piece = @squares[from_key]
-    return unless !piece.nil? ||
-                  Board.available_squares(piece)
-                       .include?(Board.algebraic_to_coords(to))
+  def move_to
+    # puts 'Input a move:'
+    # move = gets.chomp[0..1]
+    # square_to = Board.algebraic_to_coords(move[1..])
 
-    @squares[from_key] = nil
-    @squares[to.to_sym] = piece
-    piece.reset(to)
+    # piece = piece_class(move[0])
+    # piece_moves = piece.new(:move, '').moves
+    # piece_locs = piece_moves.map do |move|
+    #   [square_to[0] - move[0], square_to[1] - move[1]]
+    # end
+    # square_from = piece_locs.each do |loc_arr|
+    #   loc = Board.coords_to_algebraic(loc_arr)
+    #   return loc.to_sym if @squares[loc.to_sym].instance_of?(piece)
+    # end
+    # piece_obj = @squares[square_from]
+    # return unless piece_obj.nil? ||
+    #               Board.available_squares(piece_obj)
+    #                    .include?(Board.algebraic_to_coords(square_to))
+
+    # @squares[square_from] = nil
+    # @squares[Board.coords_to_algebraic(square_to).to_sym] = piece
+    # piece.reset(Board.coords_to_algebraic(square_to))
+  end
+
+  def piece_class(char)
+    case char
+    when '' then Pawn
+    when 'N' then Knight
+    when 'B' then Bishop
+    when 'R' then Rook
+    when 'Q' then Queen
+    when 'K' then King
+    end
   end
 
   def self.available_squares(piece)
