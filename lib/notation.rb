@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'move'
+
 # Methods to convert between coordinates and algebraic notation
 module Notation
-  include Move
+  FILES = Move.files
 
   def self.piece_letter(piece_obj)
     return '' if piece_obj.nil?

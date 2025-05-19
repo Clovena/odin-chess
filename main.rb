@@ -24,5 +24,5 @@ def test_piece(piece)
   puts
 end
 
-test_pawn = Pawn.new(:white, [1, 2])
+test_pawn = Pawn.new(:white, 'a2')
 test_piece(test_pawn)

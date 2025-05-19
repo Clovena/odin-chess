@@ -5,6 +5,10 @@ module Move
   SIZE = 8
   FILES = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
 
+  def self.files
+    FILES
+  end
+
   def self.to(piece, coords)
     piece.loc = coords if available_squares(piece).include?(coords)
     # puts Board.coords_to_algebraic(coords, piece) # Delete later
