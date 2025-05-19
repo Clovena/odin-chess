@@ -10,12 +10,6 @@ module Board
     # puts Board.coords_to_algebraic(coords, piece) # Delete later
   end
 
-  def self.valid_square?(coords)
-    return true if coords[0].between?(1, SIZE) && coords[1].between?(1, SIZE)
-
-    false
-  end
-
   def self.available_squares(piece)
     moves = piece.moves
     squares = []
@@ -24,5 +18,11 @@ module Board
       squares << coords if valid_square?(coords)
     end
     squares
+  end
+
+  def self.valid_square?(coords)
+    return true if coords[0].between?(1, SIZE) && coords[1].between?(1, SIZE)
+
+    false
   end
 end
