@@ -26,4 +26,4 @@ require_relative 'lib/notation'
 # end
 
 board = Board.new
-p board.squares
+puts board
