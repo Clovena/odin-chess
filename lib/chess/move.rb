@@ -13,8 +13,8 @@ module Move
     squares
   end
 
-  def self.valid_square?(coords)
-    return true if coords[0].between?(1, SIZE) && coords[1].between?(1, SIZE)
+  def self.valid_square?(coords, size)
+    return true if coords[0].between?(1, size) && coords[1].between?(1, size)
 
     false
   end
