@@ -28,8 +28,9 @@ class Board
     piece = Move.possible_pieces(target, self)
     if piece.length == 1
       piece.loc = key
-      piece.children =
-        @squares[:"#{key}"] = piece
+      # WIP
+      # piece.children = gather_children(piece)
+      # @squares[:"#{key}"] = piece
     else
       puts 'WIP: Multiple pieces available.'
     end
