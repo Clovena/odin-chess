@@ -50,30 +50,32 @@ class Board
 
   def gather_children
     squares.each_value do |piece|
-      return if piece.nil?
+      next if piece.nil?
 
-      piece.children = children(piece)
+      if [Pawn, Knight, King].include?(piece.class)
+        piece.children = obtain_moves(piece, false)
+      elsif [Bishop, Rook, Queen].include?(piece.class)
+        piece.children = obtain_moves(piece, true)
+      end
     end
   end
 
-  def children(piece)
-    return if [Knight, King].include?(piece.class)
-
+  def obtain_moves(piece, iterative)
     coords = Notation.pgn_to_coords(piece.loc, files)
     children = []
     piece.moves.each do |move|
-      children << check_child(coords, move)
+      children << check_child(coords, move, iterative)
     end
     children.flatten.compact.uniq
   end
 
-  def check_child(coords, move, children = [])
+  def check_child(coords, move, iterative, children = [])
     target = [coords[0] + move[0],
               coords[1] + move[1]]
     return unless Move.legal_move?(target, self)
 
     children << Notation.coords_to_pgn(target, self)
-    check_child(target, move, children)
+    check_child(target, move, iterative, children) if iterative
     children
   end
 end
