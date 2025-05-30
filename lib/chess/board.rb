@@ -9,6 +9,7 @@ class Board
     @size = 8
     @files = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
     setup
+    gather_children
   end
 
   def setup # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
@@ -45,5 +46,34 @@ class Board
       end
       puts output
     end
+  end
+
+  def gather_children
+    squares.each_value do |piece|
+      return if piece.nil?
+
+      piece.children = children(piece)
+    end
+  end
+
+  def children(piece)
+    return if [Knight, King].include?(piece.class)
+
+    coords = Notation.pgn_to_coords(piece.loc, files)
+    children = []
+    piece.moves.each do |move|
+      children << check_child(coords, move)
+    end
+    children.flatten.compact.uniq
+  end
+
+  def check_child(coords, move, children = [])
+    target = [coords[0] + move[0],
+              coords[1] + move[1]]
+    return unless Move.legal_move?(target, self)
+
+    children << Notation.coords_to_pgn(target, self)
+    check_child(target, move, children)
+    children
   end
 end
