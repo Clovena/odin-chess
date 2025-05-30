@@ -5,7 +5,7 @@ module Move
   def self.possible_pieces(move, board)
     target_class = Notation.piece_class(move[-3])
     target_square = move[-2..]
-    board.squares.compact.select do |_key, piece|
+    board.squares.select do |_key, piece|
       piece.instance_of?(target_class) &&
         piece.children.include?(target_square)
     end
