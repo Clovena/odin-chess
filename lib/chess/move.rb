@@ -18,4 +18,10 @@ module Move
 
     false
   end
+
+  def self.occupied_square?(board, loc)
+    return false if board.squares[loc.to_sym].nil?
+
+    true
+  end
 end
