@@ -26,16 +26,16 @@ module Notation
     end
   end
 
-  def self.coords_to_pgn(coords, piece = nil)
-    piece_letter(piece) + FILES[coords[0]] + coords[1].to_s
+  def self.coords_to_pgn(coords, files, piece = nil)
+    piece_letter(piece) + files[coords[0]] + coords[1].to_s
   end
 
-  def self.pgn_to_coords(pgn)
+  def self.pgn_to_coords(pgn, files)
     pgn_array = pgn.split('')
     if pgn_array.size == 2
-      [FILES.index(pgn_array[0]), pgn_array[1].to_i]
+      [files.index(pgn_array[0]), pgn_array[1].to_i]
     else
-      [FILES.index(pgn_array[1]), pgn_array[2].to_i]
+      [files.index(pgn_array[1]), pgn_array[2].to_i]
     end
   end
 end
