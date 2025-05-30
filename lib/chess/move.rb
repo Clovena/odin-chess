@@ -2,6 +2,15 @@
 
 # Methods to manipulate piece placement
 module Move
+  def self.possible_pieces(move, board)
+    target_class = Notation.piece_class(move[-3])
+    target_square = move[-2..]
+    board.squares.compact.select do |_key, piece|
+      piece.instance_of?(target_class) &&
+        piece.children.include?(target_square)
+    end
+  end
+
   def self.available_squares(piece_obj)
     loc = pgn_to_coords(piece_obj.loc)
     moves = piece_obj.moves

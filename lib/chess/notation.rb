@@ -17,7 +17,7 @@ module Notation
 
   def self.piece_class(char)
     case char
-    when '' then Pawn
+    when nil then Pawn
     when 'N' then Knight
     when 'B' then Bishop
     when 'R' then Rook
