@@ -24,4 +24,11 @@ module Move
 
     true
   end
+
+  def self.legal_move?(coords, board)
+    loc = Notation.coords_to_pgn(coords, board.files)
+    return true if invalid_square?(coords, board.size) || occupied_square?(board, loc)
+
+    false
+  end
 end
