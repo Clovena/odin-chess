@@ -9,7 +9,7 @@ class Board
     @size = 8
     @files = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
     setup
-    gather_children
+    gather_children(@squares)
   end
 
   def to_s
@@ -23,7 +23,20 @@ class Board
     end
   end
 
-  # Further methods to initialize board
+  def move_to(target)
+    key = target[-2..]
+    piece = Move.possible_pieces(target, self)
+    if piece.length == 1
+      piece.loc = key
+      piece.children =
+        @squares[:"#{key}"] = piece
+    else
+      puts 'WIP: Multiple pieces available.'
+    end
+  end
+
+  ### Further methods to initialize board
+
   def setup # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     ('a'..'h').each do |file|
       # Place pawns
@@ -47,10 +60,14 @@ class Board
         @squares[:"#{file}8"] = King.new(:black, '♚', "#{file}8")
       end
     end
+
+    # REMOVE AFTER TESTING
+    @squares[:d2] = nil
+    @squares[:d7] = nil
   end
 
-  def gather_children
-    squares.each_value do |piece|
+  def gather_children(hsh)
+    hsh.each_value do |piece|
       next if piece.nil?
 
       if [Pawn, Knight, King].include?(piece.class)
