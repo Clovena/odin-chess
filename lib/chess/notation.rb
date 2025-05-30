@@ -26,8 +26,10 @@ module Notation
     end
   end
 
-  def self.coords_to_pgn(coords, files, piece = nil)
-    piece_letter(piece) + files[coords[0]] + coords[1].to_s
+  def self.coords_to_pgn(coords, board, piece = nil)
+    return if Move.invalid_square?(coords, board.size)
+
+    piece_letter(piece) + board.files[coords[0]] + coords[1].to_s
   end
 
   def self.pgn_to_coords(pgn, files)
