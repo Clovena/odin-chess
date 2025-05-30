@@ -8,15 +8,15 @@ module Move
     squares = []
     moves.each_index do |m|
       coords = [loc[0] + moves[m][0], loc[1] + moves[m][1]]
-      squares << coords_to_pgn(coords) if valid_square?(coords)
+      squares << coords_to_pgn(coords) unless invalid_square?(coords)
     end
     squares
   end
 
-  def self.valid_square?(coords, size)
-    return true if coords[0].between?(1, size) && coords[1].between?(1, size)
+  def self.invalid_square?(coords, size)
+    return false if coords[0].between?(1, size) && coords[1].between?(1, size)
 
-    false
+    true
   end
 
   def self.occupied_square?(board, loc)
