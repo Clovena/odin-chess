@@ -12,6 +12,18 @@ class Board
     gather_children
   end
 
+  def to_s
+    8.downto(1) do |rank|
+      output = ''
+      ('a'..'h').each do |file|
+        piece = @squares[:"#{file}#{rank}"]
+        output << (piece.nil? ? '▢' : piece.sym) << ' '
+      end
+      puts output
+    end
+  end
+
+  # Further methods to initialize board
   def setup # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     ('a'..'h').each do |file|
       # Place pawns
@@ -34,17 +46,6 @@ class Board
         @squares[:"#{file}1"] = King.new(:white, '♔', "#{file}1")
         @squares[:"#{file}8"] = King.new(:black, '♚', "#{file}8")
       end
-    end
-  end
-
-  def to_s
-    8.downto(1) do |rank|
-      output = ''
-      ('a'..'h').each do |file|
-        piece = @squares[:"#{file}#{rank}"]
-        output << (piece.nil? ? '▢' : piece.sym) << ' '
-      end
-      puts output
     end
   end
 
