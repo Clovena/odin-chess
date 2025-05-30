@@ -7,3 +7,5 @@ source "https://rubygems.org"
 gem "rubocop", "~> 1.75"
 
 gem "rubocop-performance", "~> 1.25"
+
+gem "pry-byebug", "~> 3.11"
