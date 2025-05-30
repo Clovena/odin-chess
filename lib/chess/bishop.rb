@@ -3,11 +3,11 @@
 # Bishop class
 class Bishop < Piece
   def moves
-    moves_arr = []
-    range = [*-7..7]
-    range.each do |elem|
-      moves_arr << [elem, elem] << [-elem, elem] unless elem.zero?
-    end
-    moves_arr
+    [
+      [1, 1],
+      [-1, 1],
+      [-1, -1],
+      [1, -1]
+    ].freeze
   end
 end

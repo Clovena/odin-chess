@@ -2,17 +2,13 @@
 
 # Piece super-class
 class Piece
-  attr_accessor :player, :sym, :loc, :children
+  attr_accessor :player, :sym, :loc, :children, :moved
 
-  def initialize(player, sym, loc = 'a1')
+  def initialize(player = :white, sym = '', loc = 'a1')
     @player = player
     @sym = sym
-    @loc = Board.algebraic_to_coords(loc)
-    @children = Board.available_squares(self)
-  end
-
-  def reset(loc)
-    @loc = Board.algebraic_to_coords(loc)
-    @children = Board.available_squares(self)
+    @loc = loc
+    @children = nil
+    @moved = false
   end
 end
