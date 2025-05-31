@@ -25,15 +25,26 @@ class Board
 
   def move_to(target)
     key = target[-2..]
-    piece = Move.possible_pieces(target, self)
-    if piece.length == 1
-      piece.loc = key
-      # WIP
-      # piece.children = gather_children(piece)
-      # @squares[:"#{key}"] = piece
+    piece_hsh = Move.possible_pieces(target, self)
+    if piece_hsh.length == 1
+      piece = piece_hsh.values[0]
+      move_piece(piece, key, piece_hsh))
+      vacate_square(piece)
+      @squares[:"#{key}"] = piece
     else
       puts 'WIP: Multiple pieces available.'
     end
+  end
+
+  def move_piece(piece, target, hsh)
+    piece.loc = target
+    piece.moved = true
+    piece.children = gather_children(hsh)
+    # Probably wanna refactor gather_children to handle single piece
+  end
+
+  def vacate_square(piece)
+    @squares.delete(:"#{piece.loc}")
   end
 
   ### Further methods to initialize board
