@@ -44,7 +44,7 @@ class Board
   def move_piece(piece, target)
     piece.loc = target
     piece.moved = true
-    piece.children = gather_children(piece)
+    piece.children = obtain_children(piece)
   end
 
   ### Further methods to initialize board
@@ -78,29 +78,30 @@ class Board
     @squares[:d7] = nil
   end
 
-  def gather_children(piece)
+  def obtain_children(piece)
     return if piece.nil?
 
     if [Pawn, Knight, King].include?(piece.class)
-      piece.children = obtain_moves(piece, false)
+      piece.children = gather_children(piece, false)
     elsif [Bishop, Rook, Queen].include?(piece.class)
-      piece.children = obtain_moves(piece, true)
+      piece.children = gather_children(piece, true)
     end
   end
 
-  def obtain_moves(piece, iterative)
+  def gather_children(piece, iterative)
     coords = Notation.pgn_to_coords(piece.loc)
+    player = piece.player
     children = []
     piece.moves.each do |move|
-      children << check_child(coords, move, iterative)
+      children << check_child(coords, move, player, iterative)
     end
     children.flatten.compact.uniq
   end
 
-  def check_child(coords, move, iterative, children = [])
+  def check_child(coords, move, player, iterative, children = [])
     target = [coords[0] + move[0],
               coords[1] + move[1]]
-    return unless Move.legal_move?(target, self)
+    return unless Move.legal_move?(target, self, player)
 
     children << Notation.coords_to_pgn(target)
     check_child(target, move, iterative, children) if iterative
