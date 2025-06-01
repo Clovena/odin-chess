@@ -24,18 +24,18 @@ module Move
 
   def self.legal_move?(coords, board)
     loc = Notation.coords_to_pgn(coords)
-    return false if invalid_square?(coords, Dim.size) || occupied_square?(board, loc)
+    return false if invalid_square?(coords) || occupied_square?(loc, board)
 
     true
   end
 
-  def self.invalid_square?(coords, size)
-    return false if coords[0].between?(1, size) && coords[1].between?(1, size)
+  def self.invalid_square?(coords)
+    return false if coords[0].between?(1, Dim.size) && coords[1].between?(1, Dim.size)
 
     true
   end
 
-  def self.occupied_square?(board, loc)
+  def self.occupied_square?(loc, board)
     return false if board.squares[:"#{loc}"].nil? # || WIP NEED COLOR MISMATCH
 
     true
