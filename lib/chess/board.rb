@@ -10,7 +10,7 @@ class Board
   def initialize
     @squares = {}
     setup
-    @squares.each_value { |piece| gather_children(piece) }
+    @squares.each_value { |piece| obtain_children(piece) }
   end
 
   def to_s
