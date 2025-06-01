@@ -1,13 +1,14 @@
 # frozen_string_literal: false
 
+require_relative 'dim'
+
 # Board class
 class Board
-  attr_accessor :squares, :size, :files
+  include Dim
+  attr_accessor :squares
 
   def initialize
     @squares = {}
-    @size = 8
-    @files = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
     setup
     @squares.each_value { |piece| gather_children(piece) }
   end
@@ -88,7 +89,7 @@ class Board
   end
 
   def obtain_moves(piece, iterative)
-    coords = Notation.pgn_to_coords(piece.loc, files)
+    coords = Notation.pgn_to_coords(piece.loc)
     children = []
     piece.moves.each do |move|
       children << check_child(coords, move, iterative)
@@ -101,7 +102,7 @@ class Board
               coords[1] + move[1]]
     return unless Move.legal_move?(target, self)
 
-    children << Notation.coords_to_pgn(target, self)
+    children << Notation.coords_to_pgn(target)
     check_child(target, move, iterative, children) if iterative
     children
   end
