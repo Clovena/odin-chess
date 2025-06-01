@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'dim'
+
 # Methods to handle notation
 module Notation
+  include Dim
+
   # Conversions between pgn and array notation
   def self.piece_letter(piece_obj)
     return '' if piece_obj.nil?
@@ -26,18 +30,18 @@ module Notation
     end
   end
 
-  def self.coords_to_pgn(coords, board, piece = nil)
-    return if Move.invalid_square?(coords, board.size)
+  def self.coords_to_pgn(coords, piece = nil)
+    return if Move.invalid_square?(coords, Dim.size)
 
-    piece_letter(piece) + board.files[coords[0]] + coords[1].to_s
+    piece_letter(piece) + Dim.files[coords[0]] + coords[1].to_s
   end
 
-  def self.pgn_to_coords(pgn, files)
+  def self.pgn_to_coords(pgn)
     pgn_array = pgn.split('')
     if pgn_array.size == 2
-      [files.index(pgn_array[0]), pgn_array[1].to_i]
+      [Dim.files.index(pgn_array[0]), pgn_array[1].to_i]
     else
-      [files.index(pgn_array[1]), pgn_array[2].to_i]
+      [Dim.files.index(pgn_array[1]), pgn_array[2].to_i]
     end
   end
 end
