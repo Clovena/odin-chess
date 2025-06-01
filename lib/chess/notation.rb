@@ -31,7 +31,7 @@ module Notation
   end
 
   def self.coords_to_pgn(coords, piece = nil)
-    return if Move.invalid_square?(coords, Dim.size)
+    return if Move.invalid_square?(coords)
 
     piece_letter(piece) + Dim.files[coords[0]] + coords[1].to_s
   end
