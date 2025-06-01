@@ -28,22 +28,22 @@ class Board
     piece_hsh = Move.possible_pieces(target, self)
     if piece_hsh.length == 1
       piece = piece_hsh.values[0]
-      move_piece(piece, key)
       vacate_square(piece)
+      move_piece(piece, key)
       @squares[:"#{key}"] = piece
     else
       puts 'WIP: Multiple pieces available.'
     end
   end
 
+  def vacate_square(piece)
+    @squares.delete(:"#{piece.loc}")
+  end
+
   def move_piece(piece, target)
     piece.loc = target
     piece.moved = true
     piece.children = gather_children(piece)
-  end
-
-  def vacate_square(piece)
-    @squares.delete(:"#{piece.loc}")
   end
 
   ### Further methods to initialize board
