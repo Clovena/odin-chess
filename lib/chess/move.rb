@@ -23,8 +23,8 @@ module Move
   end
 
   def self.legal_move?(coords, board)
-    loc = Notation.coords_to_pgn(coords, board)
-    return false if invalid_square?(coords, board.size) || occupied_square?(board, loc)
+    loc = Notation.coords_to_pgn(coords)
+    return false if invalid_square?(coords, Dim.size) || occupied_square?(board, loc)
 
     true
   end
