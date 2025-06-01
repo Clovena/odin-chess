@@ -9,7 +9,7 @@ class Board
     @size = 8
     @files = [nil, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].freeze
     setup
-    gather_children(@squares)
+    @squares.each_value { |piece| gather_children(piece) }
   end
 
   def to_s
@@ -28,7 +28,7 @@ class Board
     piece_hsh = Move.possible_pieces(target, self)
     if piece_hsh.length == 1
       piece = piece_hsh.values[0]
-      move_piece(piece, key, piece_hsh))
+      move_piece(piece, key)
       vacate_square(piece)
       @squares[:"#{key}"] = piece
     else
@@ -36,11 +36,10 @@ class Board
     end
   end
 
-  def move_piece(piece, target, hsh)
+  def move_piece(piece, target)
     piece.loc = target
     piece.moved = true
-    piece.children = gather_children(hsh)
-    # Probably wanna refactor gather_children to handle single piece
+    piece.children = gather_children(piece)
   end
 
   def vacate_square(piece)
@@ -78,15 +77,13 @@ class Board
     @squares[:d7] = nil
   end
 
-  def gather_children(hsh)
-    hsh.each_value do |piece|
-      next if piece.nil?
+  def gather_children(piece)
+    return if piece.nil?
 
-      if [Pawn, Knight, King].include?(piece.class)
-        piece.children = obtain_moves(piece, false)
-      elsif [Bishop, Rook, Queen].include?(piece.class)
-        piece.children = obtain_moves(piece, true)
-      end
+    if [Pawn, Knight, King].include?(piece.class)
+      piece.children = obtain_moves(piece, false)
+    elsif [Bishop, Rook, Queen].include?(piece.class)
+      piece.children = obtain_moves(piece, true)
     end
   end
 
